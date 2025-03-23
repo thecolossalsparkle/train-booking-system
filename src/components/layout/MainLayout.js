@@ -475,13 +475,13 @@ const MainLayout = () => {
                       to="/register"
                       sx={{ 
                         ml: { xs: 0, sm: 1.5 },
-                        bgcolor: 'white',
-                        color: 'primary.main',
+                        background: 'linear-gradient(to right, #1a73e8, #0d47a1)',
+                        color: 'white',
                         fontWeight: 600,
-                        px: 2.5,
-                        py: 0.8,
+                        px: 3,
+                        py: 1,
                         '&:hover': {
-                          bgcolor: 'rgba(255, 255, 255, 0.9)',
+                          background: 'linear-gradient(to right, #1557b0, #0a3578)',
                           transform: 'translateY(-2px)',
                           boxShadow: '0 4px 12px rgba(0, 0, 0, 0.2)',
                         },

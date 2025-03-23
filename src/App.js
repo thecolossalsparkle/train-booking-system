@@ -19,6 +19,7 @@ import BookingPage from './components/bookings/BookingPage';
 import PaymentPage from './components/bookings/PaymentPage';
 import BookingConfirmationPage from './components/bookings/BookingConfirmationPage';
 import TicketPage from './components/tickets/TicketPage';
+import ProfilePage from './components/profile/ProfilePage';
 
 // Create a theme
 const theme = createTheme({
@@ -455,6 +456,7 @@ function App() {
             <Route path="payment" element={<PaymentPage />} />
             <Route path="booking-confirmation/:bookingId" element={<BookingConfirmationPage />} />
             <Route path="tickets/:pnr" element={<TicketPage />} />
+            <Route path="profile" element={<ProfilePage />} />
           </Route>
         </Routes>
       </Router>
