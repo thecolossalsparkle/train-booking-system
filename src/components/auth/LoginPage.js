@@ -4,21 +4,22 @@ import {
   Box,
   Button,
   Container,
-  Grid,
   Link,
   TextField,
   Typography,
-  Paper,
   InputAdornment,
   IconButton,
   Divider,
   Alert,
+  Card,
+  CardContent,
 } from '@mui/material';
 import {
   Visibility,
   VisibilityOff,
   Lock as LockIcon,
   Email as EmailIcon,
+  Train as TrainIcon,
 } from '@mui/icons-material';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
@@ -69,131 +70,243 @@ const LoginPage = () => {
   };
 
   return (
-    <Container component="main" maxWidth="xs">
-      <Box
-        sx={{
-          marginTop: 8,
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-        }}
-      >
-        <Paper
-          elevation={3}
+    <Box
+      sx={{
+        minHeight: 'calc(100vh - 64px)',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        py: 8,
+        background: 'linear-gradient(to bottom, #f8fafc, #e8f0fe)',
+      }}
+    >
+      <Container component="main" maxWidth="xs">
+        <Card
+          elevation={6}
           sx={{
-            p: 4,
-            width: '100%',
-            borderRadius: 2,
+            borderRadius: 3,
+            overflow: 'hidden',
+            transition: 'transform 0.3s, box-shadow 0.3s',
+            '&:hover': {
+              transform: 'translateY(-5px)',
+              boxShadow: '0 16px 70px -12.125px rgba(0,0,0,0.2)',
+            },
           }}
         >
-          <Box sx={{ mb: 3, textAlign: 'center' }}>
-            <Typography component="h1" variant="h4" gutterBottom>
-              Welcome Back
-            </Typography>
-            <Typography variant="body2" color="text.secondary">
-              Sign in to continue to TrainBooker
+          <Box sx={{ 
+            bgcolor: 'primary.main', 
+            py: 3, 
+            px: 2, 
+            textAlign: 'center',
+            backgroundImage: 'linear-gradient(to right, #1a73e8, #0d47a1)',
+          }}>
+            <Box 
+              sx={{ 
+                display: 'flex', 
+                alignItems: 'center', 
+                justifyContent: 'center', 
+                mb: 1 
+              }}
+            >
+              <TrainIcon sx={{ fontSize: 40, color: 'white', mr: 1 }} />
+              <Typography variant="h5" component="div" sx={{ color: 'white', fontWeight: 700 }}>
+                TrainBooker
+              </Typography>
+            </Box>
+            <Typography variant="body2" sx={{ color: 'rgba(255, 255, 255, 0.9)' }}>
+              Sign in to continue your journey
             </Typography>
           </Box>
 
-          {loginError && (
-            <Alert severity="error" sx={{ mb: 3 }}>
-              {loginError}
-            </Alert>
-          )}
+          <CardContent sx={{ p: 4 }}>
+            {loginError && (
+              <Alert 
+                severity="error" 
+                sx={{ 
+                  mb: 3, 
+                  borderRadius: 2,
+                  '& .MuiAlert-icon': { 
+                    color: 'error.main' 
+                  } 
+                }}
+              >
+                {loginError}
+              </Alert>
+            )}
 
-          <form onSubmit={formik.handleSubmit}>
-            <TextField
-              fullWidth
-              id="email"
-              name="email"
-              label="Email"
-              value={formik.values.email}
-              onChange={formik.handleChange}
-              error={formik.touched.email && Boolean(formik.errors.email)}
-              helperText={formik.touched.email && formik.errors.email}
-              margin="normal"
-              InputProps={{
-                startAdornment: (
-                  <InputAdornment position="start">
-                    <EmailIcon color="action" />
-                  </InputAdornment>
-                ),
-              }}
-            />
-            
-            <TextField
-              fullWidth
-              id="password"
-              name="password"
-              label="Password"
-              type={showPassword ? 'text' : 'password'}
-              value={formik.values.password}
-              onChange={formik.handleChange}
-              error={formik.touched.password && Boolean(formik.errors.password)}
-              helperText={formik.touched.password && formik.errors.password}
-              margin="normal"
-              InputProps={{
-                startAdornment: (
-                  <InputAdornment position="start">
-                    <LockIcon color="action" />
-                  </InputAdornment>
-                ),
-                endAdornment: (
-                  <InputAdornment position="end">
-                    <IconButton
-                      aria-label="toggle password visibility"
-                      onClick={handleTogglePasswordVisibility}
-                      edge="end"
-                    >
-                      {showPassword ? <VisibilityOff /> : <Visibility />}
-                    </IconButton>
-                  </InputAdornment>
-                ),
-              }}
-            />
+            <form onSubmit={formik.handleSubmit}>
+              <TextField
+                fullWidth
+                id="email"
+                name="email"
+                label="Email"
+                value={formik.values.email}
+                onChange={formik.handleChange}
+                error={formik.touched.email && Boolean(formik.errors.email)}
+                helperText={formik.touched.email && formik.errors.email}
+                margin="normal"
+                sx={{
+                  '& .MuiOutlinedInput-root': {
+                    borderRadius: 2,
+                    transition: 'all 0.3s',
+                    '&:hover': {
+                      borderColor: 'primary.main',
+                    },
+                    '&.Mui-focused': {
+                      boxShadow: '0 0 0 3px rgba(26, 115, 232, 0.1)',
+                    },
+                  },
+                }}
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">
+                      <EmailIcon color="primary" />
+                    </InputAdornment>
+                  ),
+                }}
+              />
+              
+              <TextField
+                fullWidth
+                id="password"
+                name="password"
+                label="Password"
+                type={showPassword ? 'text' : 'password'}
+                value={formik.values.password}
+                onChange={formik.handleChange}
+                error={formik.touched.password && Boolean(formik.errors.password)}
+                helperText={formik.touched.password && formik.errors.password}
+                margin="normal"
+                sx={{
+                  '& .MuiOutlinedInput-root': {
+                    borderRadius: 2,
+                    transition: 'all 0.3s',
+                    '&:hover': {
+                      borderColor: 'primary.main',
+                    },
+                    '&.Mui-focused': {
+                      boxShadow: '0 0 0 3px rgba(26, 115, 232, 0.1)',
+                    },
+                  },
+                }}
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">
+                      <LockIcon color="primary" />
+                    </InputAdornment>
+                  ),
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <IconButton
+                        aria-label="toggle password visibility"
+                        onClick={handleTogglePasswordVisibility}
+                        edge="end"
+                        sx={{ color: 'grey.500' }}
+                      >
+                        {showPassword ? <VisibilityOff /> : <Visibility />}
+                      </IconButton>
+                    </InputAdornment>
+                  ),
+                }}
+              />
 
-            <Box sx={{ textAlign: 'right', mb: 2, mt: 1 }}>
-              <Link component={RouterLink} to="/forgot-password" variant="body2">
-                Forgot password?
-              </Link>
-            </Box>
+              <Box sx={{ textAlign: 'right', mb: 1, mt: 0.5 }}>
+                <Link 
+                  component={RouterLink} 
+                  to="/forgot-password" 
+                  variant="body2"
+                  sx={{ 
+                    color: 'primary.main',
+                    fontWeight: 500,
+                    textDecoration: 'none',
+                    '&:hover': {
+                      textDecoration: 'underline',
+                    }
+                  }}
+                >
+                  Forgot password?
+                </Link>
+              </Box>
 
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              size="large"
-              sx={{ mt: 1, mb: 3 }}
-            >
-              Sign In
-            </Button>
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                size="large"
+                sx={{ 
+                  mt: 3, 
+                  mb: 3,
+                  py: 1.2,
+                  borderRadius: 2,
+                  fontWeight: 600,
+                  boxShadow: '0 4px 12px rgba(26, 115, 232, 0.3)',
+                  backgroundImage: 'linear-gradient(to right, #1a73e8, #0d47a1)',
+                  transition: 'all 0.3s',
+                  '&:hover': {
+                    boxShadow: '0 6px 16px rgba(26, 115, 232, 0.4)',
+                    transform: 'translateY(-2px)',
+                  }
+                }}
+              >
+                Sign In
+              </Button>
 
-            <Divider sx={{ my: 2 }}>
-              <Typography variant="body2" color="text.secondary">
-                OR
-              </Typography>
-            </Divider>
+              <Divider sx={{ 
+                my: 2,
+                '&::before, &::after': {
+                  borderColor: 'divider',
+                },
+              }}>
+                <Typography variant="body2" color="text.secondary" sx={{ px: 1 }}>
+                  OR
+                </Typography>
+              </Divider>
 
-            <Grid container justifyContent="center">
-              <Grid item>
-                <Typography variant="body2">
+              <Box sx={{ textAlign: 'center' }}>
+                <Typography variant="body2" color="text.secondary">
                   Don't have an account?{' '}
-                  <Link component={RouterLink} to="/register" variant="body2">
+                  <Link 
+                    component={RouterLink} 
+                    to="/register" 
+                    sx={{ 
+                      color: 'primary.main',
+                      fontWeight: 600,
+                      textDecoration: 'none',
+                      '&:hover': {
+                        textDecoration: 'underline',
+                      }
+                    }}
+                  >
                     Sign up
                   </Link>
                 </Typography>
-              </Grid>
-            </Grid>
-          </form>
-        </Paper>
+              </Box>
+            </form>
+          </CardContent>
+        </Card>
 
         <Box sx={{ mt: 4, textAlign: 'center' }}>
-          <Link component={RouterLink} to="/" variant="body2">
-            Return to Home
+          <Link 
+            component={RouterLink} 
+            to="/" 
+            sx={{ 
+              color: 'text.secondary',
+              textDecoration: 'none',
+              display: 'inline-flex',
+              alignItems: 'center',
+              transition: 'color 0.2s',
+              '&:hover': {
+                color: 'primary.main',
+              }
+            }}
+          >
+            <Typography variant="body2">
+              Return to Home
+            </Typography>
           </Link>
         </Box>
-      </Box>
-    </Container>
+      </Container>
+    </Box>
   );
 };
 

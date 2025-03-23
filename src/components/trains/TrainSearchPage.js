@@ -227,14 +227,14 @@ const TrainSearchPage = () => {
   };
 
   return (
-    <Container maxWidth="lg">
-      <Typography variant="h4" component="h1" gutterBottom>
+    <Container maxWidth="lg" sx={{ py: 4 }}>
+      <Typography variant="h4" component="h1" gutterBottom sx={{ mb: 3 }}>
         Find Trains
       </Typography>
       
       {/* Search Form */}
-      <Paper elevation={3} sx={{ mb: 4, p: 3, borderRadius: 2 }}>
-        <Grid container spacing={2} alignItems="flex-end">
+      <Paper elevation={3} sx={{ mb: 5, p: 4, borderRadius: 2 }}>
+        <Grid container spacing={3} alignItems="flex-end">
           <Grid item xs={12} md={4}>
             <Autocomplete
               options={STATIONS}
@@ -247,7 +247,7 @@ const TrainSearchPage = () => {
           </Grid>
           
           <Grid item xs={12} md={1} sx={{ display: 'flex', justifyContent: 'center' }}>
-            <IconButton onClick={handleSwapStations} color="primary">
+            <IconButton onClick={handleSwapStations} color="primary" sx={{ p: 1.5 }}>
               <SwapIcon />
             </IconButton>
           </Grid>
@@ -276,18 +276,18 @@ const TrainSearchPage = () => {
         </Grid>
         
         {searchError && (
-          <Typography color="error" variant="body2" sx={{ mt: 2 }}>
+          <Typography color="error" variant="body2" sx={{ mt: 3 }}>
             {searchError}
           </Typography>
         )}
         
-        <Box sx={{ mt: 3, display: 'flex', justifyContent: 'center' }}>
+        <Box sx={{ mt: 4, display: 'flex', justifyContent: 'center' }}>
           <Button
             variant="contained"
             size="large"
             startIcon={<SearchIcon />}
             onClick={handleSearch}
-            sx={{ px: 4, py: 1 }}
+            sx={{ px: 5, py: 1.5, borderRadius: 2 }}
           >
             Search Trains
           </Button>
@@ -301,23 +301,24 @@ const TrainSearchPage = () => {
       )}
       
       {searchPerformed && !isSearching && (
-        <Grid container spacing={3}>
+        <Grid container spacing={4}>
           {/* Filters */}
           <Grid item xs={12} md={3}>
-            <Paper elevation={3} sx={{ p: 3, borderRadius: 2 }}>
-              <Typography variant="h6" gutterBottom sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+            <Paper elevation={3} sx={{ p: 4, borderRadius: 2 }}>
+              <Typography variant="h6" gutterBottom sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 2 }}>
                 <FilterIcon />
                 Filters
               </Typography>
-              <Divider sx={{ my: 2 }} />
+              <Divider sx={{ my: 3 }} />
               
-              <FormControl component="fieldset" sx={{ mb: 3, width: '100%' }}>
+              <FormControl component="fieldset" sx={{ mb: 4, width: '100%' }}>
                 <FormLabel component="legend">Departure Time</FormLabel>
                 <RadioGroup
                   aria-label="departure-time"
                   name="departure-time"
                   value={departureTime}
                   onChange={handleDepartureTimeChange}
+                  sx={{ mt: 1.5 }}
                 >
                   <FormControlLabel value="any" control={<Radio />} label="Any Time" />
                   <FormControlLabel value="morning" control={<Radio />} label="Morning (5:00 - 11:59)" />
@@ -327,9 +328,9 @@ const TrainSearchPage = () => {
                 </RadioGroup>
               </FormControl>
               
-              <Divider sx={{ my: 2 }} />
+              <Divider sx={{ my: 3 }} />
               
-              <FormControl fullWidth sx={{ mb: 3 }}>
+              <FormControl fullWidth sx={{ mb: 4 }}>
                 <InputLabel id="sort-by-label">Sort By</InputLabel>
                 <Select
                   labelId="sort-by-label"
@@ -344,7 +345,7 @@ const TrainSearchPage = () => {
                 </Select>
               </FormControl>
               
-              <Divider sx={{ my: 2 }} />
+              <Divider sx={{ my: 3 }} />
               
               <FormControl fullWidth>
                 <InputLabel id="class-type-label">Class Type</InputLabel>
@@ -369,7 +370,7 @@ const TrainSearchPage = () => {
           
           {/* Results */}
           <Grid item xs={12} md={9}>
-            <Box sx={{ mb: 3 }}>
+            <Box sx={{ mb: 4 }}>
               <Typography variant="h6" gutterBottom>
                 {filteredTrains.length} trains found
               </Typography>
@@ -379,70 +380,71 @@ const TrainSearchPage = () => {
             </Box>
             
             {filteredTrains.length === 0 ? (
-              <Alert severity="info" sx={{ mb: 2 }}>
+              <Alert severity="info" sx={{ mb: 3 }}>
                 No trains found matching your criteria. Please try different filters.
               </Alert>
             ) : (
               filteredTrains.map((train) => (
-                <Card key={train.id} sx={{ mb: 3, borderRadius: 2 }}>
-                  <CardContent>
-                    <Grid container spacing={2}>
+                <Card key={train.id} sx={{ mb: 4, borderRadius: 2 }}>
+                  <CardContent sx={{ p: 3 }}>
+                    <Grid container spacing={3}>
                       <Grid item xs={12}>
                         <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 2 }}>
                           <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                            <TrainIcon color="primary" sx={{ mr: 1 }} />
+                            <TrainIcon color="primary" sx={{ mr: 1.5, fontSize: 28 }} />
                             <Typography variant="h6">{train.name}</Typography>
                           </Box>
                           <Chip 
                             label={train.trainNo} 
-                            size="small" 
+                            size="medium" 
                             variant="outlined" 
                             icon={<TrainOutlinedIcon />} 
+                            sx={{ px: 1 }}
                           />
                         </Box>
-                        <Divider />
+                        <Divider sx={{ mb: 2 }} />
                       </Grid>
                       
                       <Grid item xs={12} sm={4}>
-                        <Typography variant="h5">{train.departureTime}</Typography>
-                        <Typography variant="body2" color="text.secondary">{train.source}</Typography>
+                        <Typography variant="h5" sx={{ fontWeight: 600 }}>{train.departureTime}</Typography>
+                        <Typography variant="body2" color="text.secondary" sx={{ mt: 0.5 }}>{train.source}</Typography>
                       </Grid>
                       
                       <Grid item xs={12} sm={4} sx={{ textAlign: 'center' }}>
-                        <Typography variant="body2" color="text.secondary" sx={{ mb: 1 }}>
-                          <TimeIcon fontSize="small" sx={{ verticalAlign: 'middle', mr: 0.5 }} />
+                        <Typography variant="body2" color="text.secondary" sx={{ mb: 1.5 }}>
+                          <TimeIcon fontSize="small" sx={{ verticalAlign: 'middle', mr: 0.8 }} />
                           {train.duration}
                         </Typography>
-                        <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                          <Box sx={{ flex: 1, height: 1, bgcolor: 'divider' }} />
-                          <ArrowRightIcon color="action" />
-                          <Box sx={{ flex: 1, height: 1, bgcolor: 'divider' }} />
+                        <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', my: 1 }}>
+                          <Box sx={{ flex: 1, height: 2, bgcolor: 'divider' }} />
+                          <ArrowRightIcon color="action" sx={{ mx: 1 }} />
+                          <Box sx={{ flex: 1, height: 2, bgcolor: 'divider' }} />
                         </Box>
-                        <Typography variant="body2" color="text.secondary" sx={{ mt: 1 }}>
+                        <Typography variant="body2" color="text.secondary" sx={{ mt: 1.5 }}>
                           Runs on: {train.daysOfWeek.join(', ')}
                         </Typography>
                       </Grid>
                       
                       <Grid item xs={12} sm={4} sx={{ textAlign: 'right' }}>
-                        <Typography variant="h5">{train.arrivalTime}</Typography>
-                        <Typography variant="body2" color="text.secondary">{train.destination}</Typography>
+                        <Typography variant="h5" sx={{ fontWeight: 600 }}>{train.arrivalTime}</Typography>
+                        <Typography variant="body2" color="text.secondary" sx={{ mt: 0.5 }}>{train.destination}</Typography>
                       </Grid>
                       
                       <Grid item xs={12}>
-                        <Divider sx={{ my: 1 }} />
-                        <Typography variant="subtitle2" sx={{ mb: 1 }}>Available Classes:</Typography>
+                        <Divider sx={{ my: 2 }} />
+                        <Typography variant="subtitle2" sx={{ mb: 2 }}>Available Classes:</Typography>
                         
                         <Accordion>
-                          <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+                          <AccordionSummary expandIcon={<ExpandMoreIcon />} sx={{ px: 3 }}>
                             <Typography>View all classes and prices</Typography>
                           </AccordionSummary>
-                          <AccordionDetails>
-                            <Grid container spacing={2}>
+                          <AccordionDetails sx={{ px: 3, pt: 2, pb: 3 }}>
+                            <Grid container spacing={3}>
                               {train.classes.map((cls) => (
                                 <Grid item xs={12} sm={6} md={3} key={cls}>
                                   <Card variant="outlined" sx={{ borderRadius: 2 }}>
-                                    <CardContent>
-                                      <Box sx={{ mb: 1 }}>
+                                    <CardContent sx={{ p: 2.5 }}>
+                                      <Box sx={{ mb: 1.5 }}>
                                         <Typography variant="h6" component="span">
                                           {CLASS_TYPES[cls]}
                                         </Typography>
@@ -450,7 +452,7 @@ const TrainSearchPage = () => {
                                           ({cls})
                                         </Typography>
                                       </Box>
-                                      <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' }}>
+                                      <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', mb: 1 }}>
                                         <Typography variant="h6" color="primary">
                                           ₹{train.price[cls]}
                                         </Typography>
@@ -461,7 +463,7 @@ const TrainSearchPage = () => {
                                       <Button 
                                         variant="contained" 
                                         fullWidth 
-                                        sx={{ mt: 2 }}
+                                        sx={{ mt: 2, borderRadius: 1.5 }}
                                         onClick={() => handleSelectTrain(train.id, cls)}
                                       >
                                         Book Now
