@@ -12,6 +12,7 @@ import Layout from './components/layout/MainLayout';
 import HomePage from './components/home/HomePage';
 import LoginPage from './components/auth/LoginPage';
 import RegisterPage from './components/auth/RegisterPage';
+import ForgotPasswordPage from './components/auth/ForgotPasswordPage';
 import TrainSearchPage from './components/trains/TrainSearchPage';
 import TrainDetailsPage from './components/trains/TrainDetailsPage';
 import BookingPage from './components/bookings/BookingPage';
@@ -447,6 +448,7 @@ function App() {
             <Route index element={<HomePage />} />
             <Route path="login" element={<LoginPage />} />
             <Route path="register" element={<RegisterPage />} />
+            <Route path="forgot-password" element={<ForgotPasswordPage />} />
             <Route path="trains" element={<TrainSearchPage />} />
             <Route path="trains/:trainId" element={<TrainDetailsPage />} />
             <Route path="booking/:trainId" element={<BookingPage />} />
