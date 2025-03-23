@@ -5,9 +5,130 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+  background-color: #f9f9fc;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #b0bec5;
+  border-radius: 10px;
+  transition: background 0.3s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #90a4ae;
+}
+
+/* Smooth transitions for all elements */
+* {
+  transition: background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+/* Add print-specific styles */
+@media print {
+  @page {
+    size: A4;
+    margin: 0;
+  }
+  
+  body {
+    margin: 0;
+    padding: 0;
+    background-color: white;
+  }
+  
+  /* Hide elements that shouldn't be printed */
+  header, footer, nav,
+  button, .MuiButton-root,
+  .no-print {
+    display: none !important;
+  }
+  
+  /* Make sure text is visible */
+  * {
+    color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    -webkit-print-color-adjust: exact !important;
+  }
+  
+  /* Make sure content fits on page */
+  .MuiContainer-root {
+    padding: 0 !important;
+    max-width: 100% !important;
+  }
+  
+  /* Remove shadows for better printing */
+  .MuiPaper-elevation1,
+  .MuiPaper-elevation2,
+  .MuiPaper-elevation3,
+  .MuiPaper-elevation4,
+  .MuiPaper-elevation5,
+  .MuiPaper-elevation6 {
+    box-shadow: none !important;
+    border: 1px solid #ddd;
+  }
+}
+
+/* Page transitions and animations */
+.page-enter {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.page-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 300ms, transform 300ms;
+}
+
+.page-exit {
+  opacity: 1;
+}
+
+.page-exit-active {
+  opacity: 0;
+  transition: opacity 200ms;
+}
+
+/* Beautiful box shadows for cards and elements */
+.hover-shadow {
+  transition: all 0.3s ease;
+}
+
+.hover-shadow:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Loading pulse animation */
+@keyframes pulse {
+  0% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.6;
+  }
+}
+
+.pulse {
+  animation: pulse 1.5s infinite ease-in-out;
 }
